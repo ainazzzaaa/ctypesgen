@@ -1,0 +1,24 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+ 
+int main()
+{
+    int n, m, k;
+    std::cin >> n >> m >> k;
+ 
+    std::vector<uint16_t> va(n, 0);
+ 
+    uint16_t c = std::ceil(double(n) / double(m) * k);
+    std::cout << c << '\n';
+ 
+    for (uint16_t i{}, s{}; i < c; s += !((++i * (n - m)) % n)) {
+        for (uint16_t j{}, ci; j < n; ++j) {
+            ci = (i * (n - m) + j) % n;
+            std::cout << (ci < m && va[j]++ < k ? (ci + s) % m + 1 : 0) << ' ';
+        }
+        std::cout << '\n';
+    }
+ 
+    return 0;
+}
